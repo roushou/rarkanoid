@@ -27,6 +27,7 @@ impl Particle {
         }
     }
 
+    #[allow(clippy::too_many_arguments)]
     fn spawn(&mut self, x: f32, y: f32, vx: f32, vy: f32, color: Color, lifetime: f32, size: f32) {
         self.x = x;
         self.y = y;
