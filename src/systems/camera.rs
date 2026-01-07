@@ -18,12 +18,10 @@ impl Camera {
     }
 
     pub fn shake(&mut self, intensity: f32, duration: f32) {
-        // Only override if new shake is stronger
-        if intensity > self.shake_intensity {
-            self.shake_intensity = intensity;
-            self.shake_duration = duration;
-            self.shake_timer = duration;
-        }
+        // Always add shake (accumulates for rapid hits)
+        self.shake_intensity = (self.shake_intensity + intensity).min(15.0);
+        self.shake_duration = duration;
+        self.shake_timer = duration;
     }
 
     pub fn update(&mut self, dt: f32) {
@@ -34,11 +32,15 @@ impl Camera {
             let t = self.shake_timer / self.shake_duration;
             let current_intensity = self.shake_intensity * t;
 
-            // Random offset
-            self.offset.x = (rand_f32() - 0.5) * 2.0 * current_intensity;
-            self.offset.y = (rand_f32() - 0.5) * 2.0 * current_intensity;
+            // Random offset - larger multiplier for more visible shake
+            self.offset.x = (rand_f32() - 0.5) * 2.5 * current_intensity;
+            self.offset.y = (rand_f32() - 0.5) * 2.5 * current_intensity;
         } else {
-            self.shake_intensity = 0.0;
+            // Decay intensity when timer expires
+            self.shake_intensity *= 0.8;
+            if self.shake_intensity < 0.1 {
+                self.shake_intensity = 0.0;
+            }
             self.offset = Vector2::zero();
         }
     }

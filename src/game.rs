@@ -177,8 +177,8 @@ impl Game {
                     self.score += score * self.combo;
 
                     // Screen shake based on combo
-                    let shake_intensity = (2.0 + self.combo as f32 * 0.5).min(8.0);
-                    self.camera.shake(shake_intensity, 0.15);
+                    let shake_intensity = (4.0 + self.combo as f32 * 1.0).min(12.0);
+                    self.camera.shake(shake_intensity, 0.2);
 
                     if brick.health <= 0 {
                         // Big explosion for destroyed bricks
