@@ -2,6 +2,8 @@
 
 An Arkanoid/Breakout clone built with Rust and Raylib with sounds, particle effects and screen shake.
 
+https://github.com/user-attachments/assets/3bdba93a-b8fe-43b4-a7eb-ae247d991307
+
 ## Features
 
 - **Smooth Controls** - Keyboard (A/D, Arrow Keys) and mouse support with lerped movement
